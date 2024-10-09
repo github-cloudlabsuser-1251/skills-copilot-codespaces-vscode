@@ -1,0 +1,21 @@
+# Create a GitHub action to email a report from a file at 6 a.m. daily
+# The report is an email list of all the users in the database
+# The email is sent to the admin user
+name: Email Report
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send email
+        run: |
+          echo "Sending email with user report"
+          cat users.txt | mail -s "User report"
